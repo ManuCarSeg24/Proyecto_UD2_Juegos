@@ -20,23 +20,23 @@ public class CombinacionCorrecta {
 
         // Obtener el código secreto generado por mi compañero.
     
-        codigoSecreto = generarCodigoSecreto(codigoCompa);
+        codigoSecreto = generarCodigoSecretoPorDefecto(codigoCompa);
 
-        // Mostrar mensaje de bienvenida.
+        // Mostrar mensaje de bienvenida, y una pequeña explicación del juego.
         System.out.println("¡Bienvenido al juego 'La combinación correcta'!");
-        System.out.println("Debes adivinar un código de 4 dígitosm, puede incluir 0-9, * y #.");
+        System.out.println("Debes adivinar un código de 4 dígitosm, puedes incluir 0-9, * y #.");
         System.out.println("¡Tienes 20 intentos!");
 
 
         // Creamos un bucle while para introducir al usuario en el juego mientras tenga intentos.
         //Este bucle será nuestra columna vertebral del ejercicio.
         while (intentos > 0) {
-            //Mostramos los intentos y pedimos al usuario por pantalla que introduzca digitos ¡VALIDOS!.
+            //Mostramos los intentos y pedimos al usuario por pantalla que introduzca digitos.
             System.out.println("Intentos restantes: " + intentos);
             System.out.print("Introduce tu combinación: ");
             intentoUsuario = teclado.nextLine();
 
-            // Con este if nos aseguramos que el usurario introduce 4 digitos.
+            // Con este if nos aseguramos que el usurario introduce 4 digitos. 
             if (intentoUsuario.length() != 4) {
                 System.out.println("Por favor, introduce exactamente 4 caracteres.");
                 continue; 
@@ -85,12 +85,14 @@ public class CombinacionCorrecta {
        }    
    }
 
-   public static String generarCodigoSecreto(String codigoCompa) {
+   public static String generarCodigoSecretoPorDefecto(String codigoCompa) {
 
 
        //La parte de pedir un código aleatorio es parte de mi compañero Alejandro.
        //Realizo una función para yo poder trabajar a partir del número que generará la parte de mi compañero.
        //Aqui pondré un código por defecto como por ejemplo 123# y comenzare a trabajar desde ese código.
+       //Nota: mi compañero debe restringir los digitos introducidos, que el usuario solo pueda usar 0 a 9, * y #. 
+       //Por eso mi codigo aún no esta acabado, tengo que verificarlo. Aún estoy pensando si hacer un nuevo if o introducirlo con el if que solo deja introudcir 4 dígitos.
 
        return "123#"; // Código por defecto
    }
