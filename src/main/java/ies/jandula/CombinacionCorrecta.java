@@ -20,7 +20,8 @@ public class CombinacionCorrecta {
 
         // Obtener el código secreto generado por mi compañero.
     
-        codigoSecreto = generarCodigoSecretoPorDefecto(codigoCompa);
+        codigoSecreto = generarCodigoSecreto(codigoCompa);
+        
 
         // Mostrar mensaje de bienvenida, y una pequeña explicación del juego.
         System.out.println("¡Bienvenido al juego 'La combinación correcta'!");
@@ -85,15 +86,21 @@ public class CombinacionCorrecta {
        }    
    }
 
-   public static String generarCodigoSecretoPorDefecto(String codigoCompa) {
+   public static String generarCodigoSecreto(String codigoCompa) {
+
+    Random random= new Random();
+
+    char[][] teclado = {{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
+
+    StringBuilder codigosecreto = new StringBuilder();
 
 
-       //La parte de pedir un código aleatorio es parte de mi compañero Alejandro.
-       //Realizo una función para yo poder trabajar a partir del número que generará la parte de mi compañero.
-       //Aqui pondré un código por defecto como por ejemplo 123# y comenzare a trabajar desde ese código.
-       //Nota: mi compañero debe restringir los digitos introducidos, que el usuario solo pueda usar 0 a 9, * y #. 
-       //Por eso mi codigo aún no esta acabado, tengo que verificarlo. Aún estoy pensando si hacer un nuevo if o introducirlo con el if que solo deja introudcir 4 dígitos.
-
-       return "123#"; // Código por defecto
-   }
+    while (codigosecreto.length()<4) {
+        int fila = random.nextInt(teclado.length);
+        int columna = random.nextInt(teclado[fila].length);
+        codigosecreto.append(teclado[fila][columna]);
+    }
+    
+    return codigoCompa.toString();
+   } 
 }
