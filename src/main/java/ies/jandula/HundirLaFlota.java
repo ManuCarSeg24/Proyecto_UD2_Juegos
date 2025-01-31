@@ -4,19 +4,20 @@ import java.util.Scanner;
 
 public class HundirLaFlota {
     public static void main(String[] args) {
-        
+
         //NOTA: Todo lo que he realizado han sido pruebas y todas las variables son provisionales
         //Esto que he puesto aqui es una guia de como dividirnos el trabajo
         //Nada de esto es definitivo, puesto va a ir cambiando por si nos hace falta otros metodos
-    
+
         Scanner teclado = new Scanner(System.in);
 
         //Declaracion de variables
 
-        char[][] taleroJugador1 = {{'A', 'A', 'A'}, {'A', 'A', 'A'}, {'A', 'A', 'A'}};
-        char[][] taleroJugador2 = {{'A', 'A', 'A'}, {'A', 'A', 'A'}, {'A', 'A', 'A'}};
-        char[][] taleroFinalJugador1 = new char[3][3];
-        char[][] taleroFinalJugador2 = new char[3][3];
+        char[][] tableroJugador1 = {{'A', 'A', 'A'}, {'A', 'A', 'A'}, {'A', 'A', 'A'}};
+        char[][] tableroJugador2 = {{'A', 'A', 'A'}, {'A', 'A', 'A'}, {'A', 'A', 'A'}};
+        char[][] tableroFinalJugador1 = new char[3][3];
+        char[][] tableroFinalJugador2 = new char[3][3];
+        boolean juegoAcabado = false;  //Alejandro
 
         //Introducimos un mensaje de bienvenida y una pequeña explicación del juego.
         System.out.println("¡Bienvenido jugadores al juego de hundir la flota!");
@@ -37,17 +38,14 @@ public class HundirLaFlota {
 
         //Le pedimos a los jugadores que nos introduzcan las posiciones de los barcos.
         System.out.println("Jugador 1, por favor coloca tus barcos");
-        colocarBarcos(taleroJugador1);
+        colocarBarcos(tableroJugador1);
         System.out.println("Jugador 2, por favor coloca tus barcos");
-        colocarBarcos(taleroJugador2);
+        colocarBarcos(tableroJugador2);
 
         //Guardo en una nueva tabla la posición de los barcos, para luego pintarlo por pantalla.
-        copiarTablero(taleroJugador1, taleroFinalJugador1);
-        copiarTablero(taleroJugador2, taleroFinalJugador2);
-
-        //Alejandro
-        boolean juegoAcabado = false;
-
+        tableroFinalJugador1 = copiarTablero(tableroJugador1);
+        tableroFinalJugador2 = copiarTablero(tableroJugador2);
+        
         while (!juegoAcabado) {
             // Turno Jugador 1
             System.out.println("Turno del Jugador 1:");
@@ -56,7 +54,7 @@ public class HundirLaFlota {
                 System.out.println("¡El Jugador 1 ha ganado!");
                 break;
             }
-    
+
             // Turno Jugador 2
             System.out.println("Turno del Jugador 2:");
             juegoAcabado = realizarDisparo(tableroJugador1); //Casi igual que arriba, disparo al tablero del jugador 1
@@ -66,7 +64,10 @@ public class HundirLaFlota {
             }
         }
 
-        //esctructura más bien orientativa.
+        mostrarTableroFinal(tableroFinalJugador1, "Jugador 1");
+        mostrarTableroFinal(tableroFinalJugador2, "Jugador 2");
+
+    
     }
     //Apartir de aqui, trabajaremos con funciones (mientras hablamos si tenemos problemas entre nosotros), cada uno nos repartiremos las funciones.
     //Uno de nosotros (Alumno A) se dedicará a introducir los barcos, validar las posiciones, que puedan estar adyacentes y no se solapen.
@@ -122,11 +123,11 @@ public class HundirLaFlota {
     public static char[][] copiarTablero(char[][] tableroOriginal) {
 
         //Esta función es básica, leemos el array del tablero de cualquier jugador y la copiamos en el nuevo tablero.
-        char[][] copia = new char[tableroOriginal.length][tableroOriginal[0].length];
+        char[][] copia = new char[tableroOriginal.length][tableroOrigina.length];
 
-        for (int i = 0; i < tableroOriginal.length; i++) {
-            for (int j = 0; j < tableroOriginal[i].length; j++) {
-                copia[i][j] = tableroOriginal[i][j];
+        for (int fila = 0; fila < tableroOriginal.length; fila++) {
+            for (int col = 0; col < tableroOriginal[fila].length; col++) {
+                copia[fila][col] = tableroOriginal[fila][col];
             }
         }
         //Con esto nos gaurdamos el tablero original para cuando tengamos que pintar por pantalla el tablero
@@ -146,7 +147,7 @@ public class HundirLaFlota {
         fila = teclado.nextInt() - 1; //restamos 1 para ajustarlo a los índices del array
         System.out.println("Introduce la columna: ");
         col = teclado.nextInt() - 1;
- 
+
         //Verificamos si la coordenada está dentro del tablero
         if (fila < 0 || fila >= 3 || col < 0 || col >= 3) {
             System.out.println("Coordenadas fuera de los límites. Pierdes tu turno.");
@@ -203,5 +204,29 @@ public class HundirLaFlota {
         }
         return false;
     }
+    public static void mostrarTableroFinal(char[][] tablero, String jugador) {
+        //Creamos esta función para recorrer los tableros de los jugadores.
+        
+        System.out.println("Tablero final del " + jugador + " :");
+        //Mostramos por pantalla que jugador es.
+
+        //Con este bucle for anidado recorremos todo la arrya del jugador.
+        for (int fila = 0; fila < tablero.length; fila++) {
+            for (int col = 0; col < tablero.length; col++) {
+
+                //creamos un if, si encuentra una B en la posición, pinta por pantalla un 'B'.
+                if (tablero[fila][col] == 'B') {
+                    System.out.print("B ");
+                    //nota: utilizamos un print para que escriba en la misma línea.
+                } else {
+                    //Si no encuenta un B, con el else nos mete aqui y nos pinta un 'A'.
+                    System.out.print("A ");
+                }
+            }
+            System.out.println();
+            //Saltamos de línea.
+        }
+    }
 
 }
+
