@@ -123,10 +123,11 @@ public class HundirLaFlota {
     public static char[][] copiarTablero(char[][] tableroOriginal) {
 
         //Esta función es básica, leemos el array del tablero de cualquier jugador y la copiamos en el nuevo tablero.
-        char[][] copia = new char[tableroOriginal.length][tableroOrigina.length];
+        char[][] copia = new char[tableroOriginal.length][tableroOriginal.length];
 
         for (int fila = 0; fila < tableroOriginal.length; fila++) {
             for (int col = 0; col < tableroOriginal[fila].length; col++) {
+            
                 copia[fila][col] = tableroOriginal[fila][col];
             }
         }
